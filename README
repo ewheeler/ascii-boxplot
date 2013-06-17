@@ -1,0 +1,75 @@
+
+Given a list of datasets, generates lines of output to render a box-and-whisker chart
+in ASCII.
+
+For example, this input:
+
+render([
+        ("test data", [-2.5, -1, 0, 1, 2.5]),
+        ("", [-1, 0, 1, 2, 3.5]),
+        ("", [0, 1.5, 2, 2.5, 5.5]),
+    ])
+
+Produces this output:
+
+          |-2.68333                                                 4.2|
+ test data   -------------========0========-------------
+  series-2                --------========0=========-------------
+  series-3                        ------------=====0====--------------->
+
+
+The greater-than and less-than signs at the edge indicate that the whisker
+has been cut off at this scale.
+
+If the <box_weight> were set to 0.5, <render> would produce this output:
+
+	|-3                                                         3|
+test data      ---------------==========O==========---------------
+
+Arguments
+    list_of_tuples
+	data series to chart
+	[('name', []),...]
+
+    width
+	Defines the maximum total width of a rendered box-plot, including the series label.
+	Defaults to 72.
+
+    label_width
+	Defines the width of the space reserved for the series names.  Defaults to 10.
+
+    box_weight
+	Defines the output scale in terms of how much of the chart width should be
+	used for inter-quartile range boxes (the smallest 1st quartile to the
+	largest 3rd quartile).  The default is 1, which means half the width
+	is allocated to boxes and the other half allocated to whiskers outside
+	the box range (split between the left and right sides).
+
+	Must be a positive number.  As it gets bigger, more whiskers may get
+	cut off.  As it gets smaller, there is more room for extremely large
+	whiskers, but the box proportions may be obscured.
+
+    with_scale
+	If true, the first line returned will show
+	the minimum and maximum values displayed on the chart.
+
+	Defaults to True.
+
+Tests
+    Install nose:
+	pip install nose
+    To run tests:
+	nosetests tests.py	
+
+
+Installation
+    TODO
+    for now, either put bin/boxplot.py on your path or use lib/boxplot.py with your python program
+
+
+This is a python port of David Golden's perl script: https://github.com/dagolden/text-boxplot
+The command-line script is based on Bit.ly's data hacks: https://github.com/bitly/data_hacks
+
+
+This is free software, licensed under:
+The Apache License, Version 2.0, January 2004
