@@ -2,6 +2,20 @@
 Given a list of datasets, generates lines of output to render a box-and-whisker chart
 in ASCII.
 
+Repository includes bin version for commandline usage and lib version for use in another python script.
+
+bin/boxplot.py
+Usage: cat data | boxplot.py [options]
+
+Options:
+  -h, --help         show this help message and exit
+  -w, --width        output width
+  -l, --label-width  width of series label
+  -b, --box-weight   output scale
+  -s, --with-scale   show min and max values
+
+
+lib/boxplot.py
 For example, this input:
 
 render([
